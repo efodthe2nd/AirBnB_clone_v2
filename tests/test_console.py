@@ -67,10 +67,10 @@ class TestHBNBCommand(unittest.TestCase):
             cursor.execute('SELECT * FROM users WHERE id="{}"'.format(mdl_id))
             result = cursor.fetchone()
             self.assertTrue(result is not None)
-            dbc.close()
             self.assertIn('john25@gmail.com', result)
             self.assertIn('123', result)
             cursor.close()
+            dbc.close()
 
     @unittest.skipIf(
         os.getenv('HBNB_TYPE_STORAGE') != 'db', 'DBStorage test')

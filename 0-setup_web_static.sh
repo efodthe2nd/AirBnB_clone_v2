@@ -20,7 +20,7 @@ echo -e "\e[1;32m directories created"
 echo
 
 #--adds test string
-echo "<h1> Welcome to ebajiprojects.tech </h1>" > /data/web_static/release/test/index.html
+echo "<h1> Welcome to ebajiprojects.tech </h1>" > /data/web_static/releases/test/index.html
 echo -e "\e[1;32m Test string added\e[0m"
 echo
 
@@ -34,10 +34,11 @@ echo -e "\e[1;32m prevent overwrite\e[0m"
 echo
 
 #--create symbolic link
-sudo ln -sf /data/web_static/release/test/ /data/web_static/current
+sudo mkdir /data/web_static/current
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -hR ubuntu:ubuntu /data
 
-sudo sed -i '38i\\tLocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
+sudo sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
 
 sudo ln -sf '/etc/nginx/sites-available/default' '/etc/nginx/sites-enabled/default'
 echo -e "\e[1;32m Symbolic Link created\e[0m"

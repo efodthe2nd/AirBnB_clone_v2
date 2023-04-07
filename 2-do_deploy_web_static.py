@@ -14,10 +14,10 @@ env.hosts = ['100.25.47.153', '100.26.18.109']
 def do_deploy(archive_path):
     """Distributes an archive to a web server.
     Args:
-      archive_path (str): The path of the archive to distribute.
+        archive_path (str): The path of the archive to distribute.
     Returns:
-      If the file doesn't exist at archive_path or an error occurs - False.
-      Otherwise - True.
+        If the file doesn't exist at archive_path or an error occurs - False.
+        Otherwise - True.
     """
     if not os.path.isdir("versions"):
         os.mkdir("versions")
@@ -33,7 +33,12 @@ def do_deploy(archive_path):
     try:
         print("Packing web_static to {}".format(output))
         local("tar -cvzf {} web_static".format(output))
-        archive
+        archize_size = os.stat(output).st_size
+        print("web_static packed: {} -> {} Bytes".format(output, archize_size))
+    except Exception:
+        output = None
+    return output
+
 
 def do_deploy(archive_path):
     """Deploys the static files to the host servers.
@@ -55,7 +60,7 @@ def do_deploy(archive_path):
         run("rm -rf {}web_static".format(folder_path))
         run("rm -rf /data/web_static/current")
         run("ln -s {} /data/web_static/current".format(folder_path))
-        print("New version deployed!")
+        print('New version deployed!')
         success = True
     except Exception:
         success = False

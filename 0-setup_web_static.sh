@@ -34,7 +34,6 @@ echo -e "\e[1;32m prevent overwrite\e[0m"
 echo
 
 #--create symbolic link
-sudo mkdir /data/web_static/current
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -hR ubuntu:ubuntu /data
 
